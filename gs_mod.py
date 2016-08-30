@@ -9,6 +9,7 @@ where a buyer can be matched to up to three sellers
 
 from __future__ import print_function
 
+import sys
 import random
 import copy
 import numpy as np
@@ -146,7 +147,7 @@ def check_stability(buyer_prefs, seller_prefs, seller_matches):
 
 
 
-def run_tests(test_count=1000, buyer_count=5):
+def run_tests(test_count=1000, buyer_count=10):
     """ Perform several matching operations from random sets of preference data
     and report if a matching error occurs
 
@@ -156,6 +157,8 @@ def run_tests(test_count=1000, buyer_count=5):
     buyer_count (int) : number of buyers to use on each test run
     """
 
+    found_error = False
+
     for i in range(test_count):
 
         bp, sp, bw = get_preferences(buyer_count)
@@ -163,8 +166,12 @@ def run_tests(test_count=1000, buyer_count=5):
 
         if not check_stability(bp, sp, matches):
             print('ERROR!!!')
+            found_error = True
+
+    if not found_error:
+        print('Executed {} tests without errors'.format(test_count))
 
 
 
-
-
+''' MAIN CODE '''
+run_tests()
