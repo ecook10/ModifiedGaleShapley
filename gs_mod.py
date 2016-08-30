@@ -16,6 +16,24 @@ import numpy as np
 
 
 def get_preferences(buyer_count=5):
+    """ Returns lists of random preference orders for a specified # of buyers.
+
+    Arguments
+    ---------
+    buyer_count (int) : number of buyers to return preferences for.
+
+    Returns
+    -------
+    buyer_prefs (list) : list containing lists representing the preference
+        order of each buyer. Each preference list contains exactly one
+        reference to each seller.
+    seller_prefs (list) : lists containing lists representing prefence order of
+        each seller. Each list contains exactly onne reference to each buyer.
+    buyer_wants (list) : list containing an integer between 1 and 3 of the same
+        size as `buyer_prefs` that specifies how many sellers are desired by that
+        buyer.
+    """
+
 
     buyer_wants = np.random.randint(1, 4, buyer_count)
     seller_count = sum(buyer_wants)
@@ -39,6 +57,21 @@ def get_preferences(buyer_count=5):
 
 
 def get_matches(buyer_prefs, seller_prefs, buyer_counts):
+    """ Matches each seller to a buyer with no unstable matches.
+
+    Arguments
+    ---------
+    buyer_prefs (list) : list of lists representing how each buyer's ranks the
+        prospective sellers (highest first)
+    seller_prefs (list) : list of lists representing how each seller ranks the
+        prospective buyers (highest first)
+    buyer_counts (list) : list of integers representing how many sellers each
+        buyer is seeking
+
+    Returns
+    -------
+    seller_matches (list) : list matching each seller (index) to a buyer (value)
+    """
 
     buyer_prefs = copy.deepcopy(buyer_prefs)
     seller_prefs = copy.deepcopy(seller_prefs)
@@ -78,6 +111,24 @@ def get_matches(buyer_prefs, seller_prefs, buyer_counts):
 
 
 def check_stability(buyer_prefs, seller_prefs, seller_matches):
+    """ Check the stability of a list of matches.
+
+    Stability is defined as a matching where no buyer prefers a seller they are
+    not matched to who  also prefers said buyer.
+
+    Arguments
+    ---------
+    buyer_prefs (list) : list of lists representing how each buyer's ranks the
+        prospective sellers (highest first)
+    seller_prefs (list) : list of lists representing how each seller ranks the
+        prospective buyers (highest first)
+    seller_matches (list) : list matching each seller (index) to a buyer (value)
+
+    Returns
+    -------
+    is_stable (bool) : boolean value of whether the matches provided are stable
+        given the two lists of preferences
+    """
 
     for seller, buyer in enumerate(seller_matches):
 
@@ -96,6 +147,14 @@ def check_stability(buyer_prefs, seller_prefs, seller_matches):
 
 
 def run_tests(test_count=1000, buyer_count=5):
+    """ Perform several matching operations from random sets of preference data
+    and report if a matching error occurs
+
+    Arguments
+    ---------
+    test_count (int) : number of tests to run
+    buyer_count (int) : number of buyers to use on each test run
+    """
 
     for i in range(test_count):
 
