@@ -4,6 +4,11 @@ Code by Evan Cook
 
 ---------------------------------------
 
+## Running instructions
+
+To run simply cd into the repo and run the `gs_mod.py` script
+
+
 ## Prompt
 
 Your task is to implement a variation of the Gale-Shapley algorithm, which is a solution to the Stable Marriage Problem[https://en.wikipedia.org/wiki/Stable_marriage_problem]. Use whatever language is best suited to the problem given your comfort in that language. If you pick something weird (Outside top 10 on Github) then be prepared to justify it. Your solution must fit the following criteria:
