@@ -11,7 +11,6 @@ from __future__ import print_function
 
 import random
 import copy
-import numpy as np
 
 
 
@@ -69,8 +68,6 @@ def check_stability(buyer_prefs, seller_prefs, seller_matches):
 
         for bb in better_buyers:
             matched_seller = seller_matches.index(bb)
-            print(bb)
-            print(buyer_prefs[bb])
             if buyer_prefs[bb].index(seller) < buyer_prefs[bb].index(matched_seller):
                 # A buyer preferred by a seller over their match also prefers
                 # the seller over their match
